@@ -2,17 +2,21 @@ import { useState } from 'react';
 
 const USERS = [
   {
-    id: 'robin',
+    email: 'robin@google.com',
     password: '5555',
   },
   {
-    id: 'sally',
+    email: 'sally@google.com',
     password: '7777',
   },
 ];
 
-const Login = () => {
-  const [id, setId] = useState('');
+const Login = ({
+  email: initialEmail,
+  onSuccess,
+}) => {
+  const [email, setEmail] =
+    useState(initialEmail);
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
@@ -20,14 +24,14 @@ const Login = () => {
 
     // 필수값 확인
     if (
-      id.trim() === '' ||
+      email.trim() === '' ||
       password.trim() === ''
     )
       return alert('필수값을 입력해주세요');
 
-    // ID에 맞는 사용자 확인
+    // 이메일에 맞는 사용자 확인
     const targetUser = USERS.find(
-      (userInfo) => userInfo.id === id
+      (userInfo) => userInfo.email === email
     );
     console.log('targetUser', targetUser);
 
@@ -42,36 +46,63 @@ const Login = () => {
       return alert('비밀번호가 틀립니다.');
 
     alert('로그인에 성공하였습니다!');
+    onSuccess?.();
   };
 
   return (
-    <div>
-      <p>테스트ID: {id}</p>
-      <p>테스트PW: {password}</p>
-
-      <label htmlFor="">아이디</label>
-      <input
-        type="text"
-        maxLength={10}
-        value={id}
-        onChange={(event) =>
-          setId(event.target.value)
-        }
-      />
-
-      <label htmlFor="">비밀번호</label>
-      <input
-        type="password"
-        maxLength={10}
-        value={password}
-        onChange={(event) =>
-          setPassword(event.target.value)
-        }
-      />
-
-      <button onClick={handleLogin}>
-        로그인
-      </button>
+    <div className="login-container">
+      <div
+        className="login-form"
+        action="todo.html"
+        method="GET"
+      >
+        <h1>로그인</h1>
+        <div className="input-group">
+          <label htmlFor="email">이메일</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            maxLength="20"
+            required=""
+            value={email}
+            onChange={(event) =>
+              setEmail(event.target.value)
+            }
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="password">
+            비밀번호
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            maxLength="20"
+            required=""
+            value={password}
+            onChange={(event) =>
+              setPassword(event.target.value)
+            }
+          />
+        </div>
+        <div className="button-group">
+          <button
+            type="button"
+            className="btn primary"
+            onClick={handleLogin}
+          >
+            로그인
+          </button>
+          <button
+            type="button"
+            className="btn success"
+          >
+            회원가입
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
