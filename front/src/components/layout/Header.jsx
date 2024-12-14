@@ -18,7 +18,7 @@ const Header = () => {
       </div>
 
       <div class="header-right">
-        {userInfo.name}님 반갑습니다.
+        {userInfo?.name}님 반갑습니다.
         <button
           class="btn primary"
           onClick={() =>

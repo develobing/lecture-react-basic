@@ -1,25 +1,39 @@
 import Login from './components/Login';
+import ProtectedRoute from './components/routes/ProtectedRoute';
 import Todo from './components/Todo';
-import { useSelector } from 'react-redux';
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
 
 const App = () => {
-  const { userInfo } = useSelector(
-    (state) => state
-  );
-  const isLoggedIn = !userInfo;
-
   return (
-    <div>
-      <h1>프론티어 TODO</h1>
+    <Router>
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            <Login email="robin@google.com" />
+          }
+        />
 
-      {isLoggedIn ? (
-        <Login email="robin@google.com">
-          <h1>asdfsadfsadfasdfsdf</h1>
-        </Login>
-      ) : (
-        <Todo />
-      )}
-    </div>
+        <Route
+          path="/todo"
+          element={
+            <ProtectedRoute>
+              <Todo />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="*"
+          element={<Navigate to="/login" />}
+        />
+      </Routes>
+    </Router>
   );
 };
 

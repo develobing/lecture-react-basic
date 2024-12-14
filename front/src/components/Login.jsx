@@ -3,6 +3,7 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const USERS = [
   {
@@ -17,12 +18,9 @@ const USERS = [
   },
 ];
 
-const Login = ({
-  children,
-  email: initialEmail,
-  onSuccess,
-}) => {
+const Login = ({ email: initialEmail }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [email, setEmail] =
     useState(initialEmail);
@@ -56,13 +54,21 @@ const Login = ({
       loginUser.password === password;
     if (!isValidPassword)
       return alert('비밀번호가 틀립니다.');
-
     console.log('로그인에 성공하였습니다!');
 
+    handleSuccess(loginUser);
+  };
+
+  // 로그인 성공 시 로직
+  const handleSuccess = (loginUser) => {
+    // 1. 유저 데이터 세팅
     dispatch({
       type: 'LOGIN',
       payload: loginUser,
     });
+
+    // 2. Todo 페이지로 이동
+    navigate('/todo');
   };
 
   return (
