@@ -1,5 +1,8 @@
 import { useState, useContext } from 'react';
-import { UserContext } from '../context/UserContext';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 const USERS = [
   {
@@ -19,10 +22,13 @@ const Login = ({
   email: initialEmail,
   onSuccess,
 }) => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] =
     useState(initialEmail);
   const [password, setPassword] = useState('');
-  const { setUserInfo } = useContext(UserContext);
+  const state = useSelector((state) => state);
+  console.log('state', state);
 
   const handleLogin = () => {
     // 필수값 확인
@@ -52,20 +58,23 @@ const Login = ({
       return alert('비밀번호가 틀립니다.');
 
     console.log('로그인에 성공하였습니다!');
-    onSuccess?.(loginUser);
-    setUserInfo(loginUser);
+
+    dispatch({
+      type: 'LOGIN',
+      payload: loginUser,
+    });
   };
 
   return (
     <div className="login-container">
-      {children}
-
       <div
         className="login-form"
         action="todo.html"
         method="GET"
       >
         <h1>로그인</h1>
+
+        <p>유저 로그인: {state.userInfo?.name}</p>
 
         <div className="input-group">
           <label htmlFor="email">이메일</label>

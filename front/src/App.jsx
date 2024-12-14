@@ -1,10 +1,12 @@
 import Login from './components/Login';
 import Todo from './components/Todo';
-import { useContext, useState } from 'react';
-import { UserContext } from './context/UserContext';
+import { useSelector } from 'react-redux';
 
 const App = () => {
-  const { isLoggedIn } = useContext(UserContext);
+  const { userInfo } = useSelector(
+    (state) => state
+  );
+  const isLoggedIn = !userInfo;
 
   return (
     <div>

@@ -1,9 +1,13 @@
-import { useContext } from 'react';
-import { UserContext } from '../../context/UserContext';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 const Header = () => {
-  const { userInfo, setUserInfo } =
-    useContext(UserContext);
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector(
+    (state) => state
+  );
 
   return (
     <header class="header">
@@ -17,7 +21,9 @@ const Header = () => {
         {userInfo.name}님 반갑습니다.
         <button
           class="btn primary"
-          onClick={() => setUserInfo(null)}
+          onClick={() =>
+            dispatch({ type: 'LOGOUT' })
+          }
         >
           로그아웃
         </button>
