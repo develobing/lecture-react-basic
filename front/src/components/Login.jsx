@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 const USERS = [
   {
     email: 'robin@google.com',
     password: '5555',
+    name: '로빈',
   },
   {
-    email: 'sally@google.com',
+    email: '@google.com',
     password: '7777',
+    name: '샐리',
   },
 ];
 
@@ -18,10 +21,9 @@ const Login = ({
   const [email, setEmail] =
     useState(initialEmail);
   const [password, setPassword] = useState('');
+  const { setUserInfo } = useContext(UserContext);
 
   const handleLogin = () => {
-    console.log('handleLogin() ');
-
     // 필수값 확인
     if (
       email.trim() === '' ||
@@ -30,23 +32,27 @@ const Login = ({
       return alert('필수값을 입력해주세요');
 
     // 이메일에 맞는 사용자 확인
-    const targetUser = USERS.find(
+    const loginUser = USERS.find(
       (userInfo) => userInfo.email === email
     );
-    console.log('targetUser', targetUser);
+    console.log(
+      'handleLogin() - loginUser',
+      loginUser
+    );
 
     // 사용자가 없으면 리턴
-    if (!targetUser)
+    if (!loginUser)
       return alert('유저가 없습니다.');
 
     // 비밀번호 확인
     const isValidPassword =
-      targetUser.password === password;
+      loginUser.password === password;
     if (!isValidPassword)
       return alert('비밀번호가 틀립니다.');
 
-    alert('로그인에 성공하였습니다!');
-    onSuccess?.();
+    console.log('로그인에 성공하였습니다!');
+    onSuccess?.(loginUser);
+    setUserInfo(loginUser);
   };
 
   return (
