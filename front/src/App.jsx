@@ -14,9 +14,7 @@ const App = () => {
       <Routes>
         <Route
           path="/login"
-          element={
-            <Login email="robin@google.com" />
-          }
+          element={<Login />}
         />
 
         <Route
