@@ -6,39 +6,30 @@ const Todo = () => {
     <div>
       <Header />
 
-      <section class="container">
-        <div class="todo-container">
+      <section className="container">
+        <div className="todo-container">
           <h1>오늘 할 일</h1>
 
           <main>
-            <div class="todo-input">
+            <div className="todo-input">
               <input
                 type="text"
-                class="new-task"
+                className="new-task"
                 placeholder="할 일을 입력하세요"
               />
-              <button
-                class="btn primary"
-                onclick="handleAddTask()"
-              >
+              <button className="btn primary">
                 추가하기
               </button>
             </div>
 
-            <ul class="todo-list">
+            <ul className="todo-list">
               <li>
                 <span>React 공부하기</span>
-                <div class="button-group">
-                  <button
-                    class="btn success"
-                    onclick="completeTask(this)"
-                  >
+                <div className="button-group">
+                  <button className="btn success">
                     완료
                   </button>
-                  <button
-                    class="btn delete"
-                    onclick="deleteTask(this)"
-                  >
+                  <button className="btn delete">
                     삭제
                   </button>
                 </div>
@@ -47,32 +38,26 @@ const Todo = () => {
           </main>
         </div>
 
-        <div class="complete-container">
+        <div className="complete-container">
           <h2>완료한 일</h2>
-          <ul class="complete-list">
+          <ul className="complete-list">
             <li>
-              <span class="strike">
+              <span className="strike">
                 HTML 공부하기
               </span>
-              <div class="button-group">
-                <button
-                  class="btn warning"
-                  onclick="cancelComplete(this)"
-                >
+              <div className="button-group">
+                <button className="btn warning">
                   취소
                 </button>
               </div>
             </li>
 
             <li>
-              <span class="strike">
+              <span className="strike">
                 CSS 공부하기
               </span>
-              <div class="button-group">
-                <button
-                  class="btn warning"
-                  onclick="cancelComplete(this)"
-                >
+              <div className="button-group">
+                <button className="btn warning">
                   취소
                 </button>
               </div>

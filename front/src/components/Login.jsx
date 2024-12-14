@@ -1,8 +1,5 @@
-import { useState, useContext } from 'react';
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 const USERS = [
@@ -18,16 +15,14 @@ const USERS = [
   },
 ];
 
-const Login = ({ email: initialEmail }) => {
+const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [email, setEmail] =
-    useState(initialEmail);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const state = useSelector((state) => state);
-  console.log('state', state);
 
+  // 로그인 버튼 클릭 시 호출
   const handleLogin = () => {
     // 필수값 확인
     if (
@@ -56,10 +51,11 @@ const Login = ({ email: initialEmail }) => {
       return alert('비밀번호가 틀립니다.');
     console.log('로그인에 성공하였습니다!');
 
+    // 로그인 성공 시
     handleSuccess(loginUser);
   };
 
-  // 로그인 성공 시 로직
+  // 로그인 성공 시 호출
   const handleSuccess = (loginUser) => {
     // 1. 유저 데이터 세팅
     dispatch({
@@ -79,8 +75,6 @@ const Login = ({ email: initialEmail }) => {
         method="GET"
       >
         <h1>로그인</h1>
-
-        <p>유저 로그인: {state.userInfo?.name}</p>
 
         <div className="input-group">
           <label htmlFor="email">이메일</label>

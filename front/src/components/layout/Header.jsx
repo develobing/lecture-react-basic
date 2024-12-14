@@ -5,22 +5,22 @@ import {
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { userInfo } = useSelector(
-    (state) => state
+  const userInfo = useSelector(
+    (state) => state.userInfo
   );
 
   return (
-    <header class="header">
-      <div class="header-left">
-        <span class="header-logo">
+    <header className="header">
+      <div className="header-left">
+        <span className="header-logo">
           오늘 할 일
         </span>
       </div>
 
-      <div class="header-right">
+      <div className="header-right">
         {userInfo?.name}님 반갑습니다.
         <button
-          class="btn primary"
+          className="btn primary"
           onClick={() =>
             dispatch({ type: 'LOGOUT' })
           }

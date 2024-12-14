@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  const state = useSelector((state) => state);
-  const isLoggedIn = !!state.userInfo;
+  const userInfo = useSelector(
+    (state) => state.userInfo
+  );
+  const isLoggedIn = !!userInfo;
 
   if (!isLoggedIn) {
     return (
@@ -16,7 +17,3 @@ const ProtectedRoute = ({ children }) => {
 };
 
 export default ProtectedRoute;
-
-ProtectedRoute.propTypes = {
-  children: PropTypes.element.isRequired,
-};
