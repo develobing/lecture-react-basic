@@ -15,6 +15,7 @@ const USERS = [
 ];
 
 const Login = ({
+  children,
   email: initialEmail,
   onSuccess,
 }) => {
@@ -57,12 +58,15 @@ const Login = ({
 
   return (
     <div className="login-container">
+      {children}
+
       <div
         className="login-form"
         action="todo.html"
         method="GET"
       >
         <h1>로그인</h1>
+
         <div className="input-group">
           <label htmlFor="email">이메일</label>
           <input

@@ -11,7 +11,9 @@ const App = () => {
       <h1>프론티어 TODO</h1>
 
       {isLoggedIn ? (
-        <Login email="robin@google.com" />
+        <Login email="robin@google.com">
+          <h1>asdfsadfsadfasdfsdf</h1>
+        </Login>
       ) : (
         <Todo />
       )}
